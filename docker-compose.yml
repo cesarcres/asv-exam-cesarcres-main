@@ -1,0 +1,27 @@
+version: '3'
+services:
+  ldap:
+    image: osixia/openldap:1.5.0   
+    container_name: ldap
+    command: --copy-service --loglevel debug
+    environment:
+      - LDAP_TLS_VERIFY_CLIENT=try
+      - LDAP_TLS_ENFORCE=True
+      - LDAP_TLS_PASSWORD= 1234
+      - LDAP_ORGANISATION=asv
+      - LDAP_DOMAIN=curs.asv.udl.cat
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - ./init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
+      - ./data/ldap:/var/lib/ldap
+      - ./data/slapd:/etc/ldap/slapd.d
+
+  ldap-client:
+    image: debian:latest
+    container_name: ldap-client
+    command: bash -c "apt-get update && apt-get install -y libpam-ldap ldap-utils && ./query.sh"
+    volumes:
+      - ca-certs.pem:./usr/local/share/ca-certificates/ca.crt
+  

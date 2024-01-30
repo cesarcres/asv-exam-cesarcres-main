@@ -1,0 +1,59 @@
+dn: ou=groups,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=users,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: ou=system,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: organizationalUnit
+objectClass: top
+ou: system
+
+dn: cn=osproxy,ou=system,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: osproxy
+userPassword:{SSHA512}wkUh/hgRDFNihd89b1J7mWKo7uLA38cCLWLxX7LFCCf8qq3Nh1N/RHguQBAs1kauhyzEVyNOY5LrYmZPCTRS5o+a1q+iLVvJ
+description: OS proxy for resolving UIDs/GIDs
+
+dn: cn=programadors,ou=groups,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: posixGroup
+cn: programadors
+gidNumber: 5000
+memberUid: jordi
+
+dn: cn=dissenyadors,ou=groups,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: posixGroup
+cn: dissenyadors
+gidNumber: 5001
+memberUid: manel
+
+dn: uid=jordi,ou=users,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+cn: Jordi
+sn: Mateo
+uid: jordi
+uidNumber: 4000
+gidNumber: 5000
+homeDirectory: /home/jordi
+loginShell: /bin/sh
+gecos: Full Name
+
+dn: uid=manel,ou=users,dc=curs,dc=asv,dc=udl,dc=cat
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+cn: manel
+sn: Mateo
+uid: manel
+uidNumber: 4001
+gidNumber: 5001
+homeDirectory: /home/manel
+loginShell: /bin/sh
+gecos: Full Name
