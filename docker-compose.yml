@@ -7,21 +7,31 @@ services:
     environment:
       - LDAP_TLS_VERIFY_CLIENT=try
       - LDAP_TLS_ENFORCE=True
-      - LDAP_TLS_PASSWORD= 1234
+      - LDAP_ADMIN_PASSWORD= 1234
       - LDAP_ORGANISATION=asv
       - LDAP_DOMAIN=curs.asv.udl.cat
-    ports:
-      - "389:389"
-      - "636:636"
+      - LDAP_TLS_CRT_FILENAME=ldapcert.pem
+      - LDAP_TLS_KEY_FILENAME=ldapkey.pem
+      - LDAP_TLS_DH_PARAM_FILENAME=dhparam.pem
+      - LDAP_TLS_CA_CRT_FILENAME=cacerts.pem
+
     volumes:
       - ./init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
       - ./data/ldap:/var/lib/ldap
-      - ./data/slapd:/etc/ldap/slapd.d
+      - ./data/slapd:/etc/ldap/slapd.d 
+      - ./certificates:/container/service/slapd/assets/certs     
 
   ldap-client:
     image: debian:latest
     container_name: ldap-client
     command: bash -c "apt-get update && apt-get install -y libpam-ldap ldap-utils && ./query.sh"
+    environment:
+      - LDAP_SERVER=ldaps://ldap:636
+      - BASE_DN=dc=curs,dc=asv,dc=udl,dc=cat
+      - LDAP_USER=cn=admin,dc=curs,dc=asv,dc=udl,dc=cat
+      - LDAP_PASSWORD=1234
+
     volumes:
-      - ca-certs.pem:./usr/local/share/ca-certificates/ca.crt
+      - ./scripts/query.sh:/query.sh
+      - ./certificates/cacerts.pem:/usr/local/share/ca-certificates/ca.crt
   

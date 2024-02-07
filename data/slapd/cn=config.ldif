@@ -1,0 +1,28 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 527d7d21
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcArgsFile: /var/run/slapd/slapd.args
+olcLogLevel: none
+olcPidFile: /var/run/slapd/slapd.pid
+olcToolThreads: 1
+structuralObjectClass: olcGlobal
+entryUUID: d5d49d1e-58bc-103e-86c2-3feb1d5f8119
+creatorsName: cn=config
+createTimestamp: 20240205215409Z
+olcTLSCipherSuite: SECURE256:+SECURE128:-VERS-TLS-ALL:+VERS-TLS1.2:-RSA:-DHE
+ -DSS:-CAMELLIA-128-CBC:-CAMELLIA-256-CBC
+olcTLSCACertificateFile: /container/run/service/slapd/assets/certs/cacerts.p
+ em
+olcTLSCertificateFile: /container/run/service/slapd/assets/certs/ldapcert.pe
+ m
+olcTLSCertificateKeyFile: /container/run/service/slapd/assets/certs/ldapkey.
+ pem
+olcTLSDHParamFile: /container/run/service/slapd/assets/certs/dhparam.pem
+olcTLSVerifyClient: try
+olcSecurity: ssf=128
+olcLocalSSF: 128
+entryCSN: 20240207200526.893593Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20240207200526Z
